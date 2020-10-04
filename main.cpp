@@ -9,9 +9,9 @@ calling functions.
 Please design your program with input/output menu so that a user can easily test and use your
 program
 
-1. (10 points) Write a function that searches a node in a BST.
-2. (10 points) Write a function that inserts a new node into a BST.
-3. (20 points) Write a function that deletes an existing node in a BST.
+1. (10 points) Write a function that searches a node in a BST. - done
+2. (10 points) Write a function that inserts a new node into a BST. - done
+3. (20 points) Write a function that deletes an existing node in a BST. done
 4. (20 points) Write a function that display all nodes in a tree format.
 For example:
  50
@@ -25,9 +25,9 @@ lowest.
 Write a function that returns the cost of the most expensive path from the root to a leaf node in
 a BST
 */
-#include "heading.h"
-#include <iostream>
 
+#include <iostream>
+#include "thehead.h"
 
 using namespace std;
 
@@ -36,33 +36,55 @@ int main()
 {
     int number;
     BST theTree;
-    int option;
+    int choice;
+    bool found;
+    bool endIt=false;
 
-    option = options();
-    switch(option)
+
+    while(!endIt)
     {
-    case 1:
-        cout<<"Enter number you are looking for"<<endl;
-        cin>>number;
-        theTree.findNode(number);
-        break;
-    case 2:
+        choice = options();
+        switch(choice)
+        {
+        case 1:
+            cout<<"Enter number you are looking for"<<endl;
+            cin>>number;
+            found= theTree.findNode(number);
+            if(found)
+                cout<<"found\n";
+            else
+                cout<<"not found!\n";
+            break;
+        case 2:
+            cout<<"Enter number you want to insert"<<endl;
+            cin>>number;
+            theTree.insertNode(number);
 
-        break;
-    case 3:
+            break;
+        case 3:
+            cout<<"Enter number you want to delete"<<endl;
+            cin>>number;
+            theTree.deleteNode(number);
+            break;
+        case 4:
 
-        break;
-    case 4:
+            break;
+        case 5:
 
-        break;
-    case 5:
+            break;
+        case 6:
 
-        break;
-    case 6:
-
-        break;
+            break;
+        case 7:
+            endIt = true;
+            break;
+        }
     }
 
 
     return 0;
 }
+
+
+
+
