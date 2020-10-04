@@ -19,8 +19,20 @@ For example:
  20 80
  / \ / \
  10 30 60 90
-5. (20 points) Write a function that prints out the keys for a BST in sorted order from highest to
-lowest.
+5. (20 points) Write a function that prints out the keys for a BST in sorted order from highest to lowest. on it
+    go right until you reach the highest node,
+    (
+    print that node
+    if node has a left node, go there
+        check for right, pint if there
+        check fr left
+    return to node before that
+    return to other nodes.
+    repeat
+    base case: if left nodeptr and right ptr are null
+
+
+
 6. (20 points) The cost of a path in a tree is sum of the keys of the nodes participating in that path.
 Write a function that returns the cost of the most expensive path from the root to a leaf node in
 a BST
@@ -67,7 +79,7 @@ int main()
             theTree.deleteNode(number);
             break;
         case 4:
-
+            theTree.sortedOrder();
             break;
         case 5:
 

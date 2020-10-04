@@ -6,8 +6,8 @@ int options()
     cout<<"1.Search a node in BST\n"
         <<"2.Insert a new node into BST.\n"
         <<"3.Delete an existing node in BST.\n"
-        <<"4.Display all nodes in a tree format.\n"
-        <<"5.prints out the keys for a BST in sorted order\n"
+        <<"4.Prints out the keys for a BST in sorted order\n"
+        <<"5.Display all nodes in a tree format.\n"
         <<"6. cost of the most expensive path\n";
     do
     {
@@ -115,16 +115,22 @@ void BST::deleteNode(int key)
 {
     node *searcher= root;
     node * before = searcher;
-    // case1
+    if(root ==nullptr)
+    {
+        cout<<"tree empty\n";
+        return;
+    }
 
-    if( root->number==key)
+    if(root->number==key)
     {
         while(searcher!=nullptr)
         {
-            before = searcher;
+            before=searcher;
             searcher=searcher->right;
         }
         root->number= before->number;
+        delete before;
+        before = nullptr;
         return;
     };
 
@@ -136,7 +142,7 @@ void BST::deleteNode(int key)
             {
                 delete searcher;
                 searcher= nullptr;
-                before = searcher;
+                before->right = searcher;
                 cout<<key<<" deleted\n";
                 return;
             }
@@ -165,6 +171,8 @@ void BST::deleteNode(int key)
                     searcher = searcher->right;
                 }
                 mainpos->number= before->number;
+                delete searcher;
+                searcher = nullptr;
                 delete before;
                 before = nullptr;
                 cout<<key<<" deleted\n";
@@ -190,10 +198,43 @@ void BST::deleteNode(int key)
         cout<<"Value not in tree\n";
 }
 
+void BST::printNode(node * right)
+{
+    //base case : if leaf nodes are empty
+    if(right==nullptr)
+    {
+        return;
+    }
+    else if(right->right !=nullptr)
+    {
+        printNode(right->right);
+    }
+    cout<<right->number<<" ";
+    if(right->left==nullptr)
+            return;
+    else if(right->left!=nullptr)
+    {
+        printNode(right->left);
+    }
+    return;
+
+
+
+}
 
 void BST::sortedOrder()
 {
-    node * printer = root;
-
-
+    node * curNode = root;
+    if(curNode!=nullptr)
+    {
+        printNode(curNode->right);
+        cout<<curNode->number<<" ";
+        if(curNode->left!=nullptr)
+        {
+            printNode(curNode->left);
+        }
+        cout<<endl;
+        return;
+    }
+    cout<<"tree is empty\n";
 }

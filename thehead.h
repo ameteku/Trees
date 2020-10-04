@@ -32,6 +32,7 @@ public:
     bool findNode(int key);
     void deleteNode(int key);
     void printTreeFormat();
+    void printNode(node*);
     void sortedOrder();
     void findCost();
 
