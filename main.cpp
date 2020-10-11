@@ -13,13 +13,9 @@ program
 2. (10 points) Write a function that inserts a new node into a BST. - done
 3. (20 points) Write a function that deletes an existing node in a BST. done
 4. (20 points) Write a function that display all nodes in a tree format.
-For example:
- 50
- / \
- 20 80
- / \ / \
- 10 30 60 90
-5. (20 points) Write a function that prints out the keys for a BST in sorted order from highest to lowest. on it
+    -print a lot of space and the root
+    --pass
+5. (20 points) Write a function that prints out the keys for a BST in sorted order from highest to lowest. done
     go right until you reach the highest node,
     (
     print that node
@@ -34,7 +30,7 @@ For example:
 
 
 6. (20 points) The cost of a path in a tree is sum of the keys of the nodes participating in that path.
-Write a function that returns the cost of the most expensive path from the root to a leaf node in
+Write a function that returns the cost of the most expensive path from the root to a leaf node in -done
 a BST
 */
 
@@ -46,6 +42,7 @@ using namespace std;
 int main()
 
 {
+    int lowestlevel;
     int number;
     BST theTree;
     int choice;
@@ -82,10 +79,10 @@ int main()
             theTree.sortedOrder();
             break;
         case 5:
-
+            theTree.printTreeFormat();
             break;
         case 6:
-
+            theTree.findCost();
             break;
         case 7:
             endIt = true;

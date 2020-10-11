@@ -3,6 +3,7 @@
 
 
 #include <iostream>
+#include <math.h>
 
 
 using namespace std;
@@ -31,9 +32,12 @@ public:
     void insertNode(int number);
     bool findNode(int key);
     void deleteNode(int key);
+    int longestnode(node*);
     void printTreeFormat();
     void printNode(node*);
     void sortedOrder();
+    double adder(node*);
+
     void findCost();
 
 

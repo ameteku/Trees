@@ -123,43 +123,79 @@ void BST::deleteNode(int key)
 
     if(root->number==key)
     {
+        if(root->left==nullptr && root->right==nullptr)
+        {
+            root=nullptr;
+            cout<<key<<" deleted\n";
+            return;
+        }
         while(searcher!=nullptr)
         {
             before=searcher;
             searcher=searcher->right;
         }
         root->number= before->number;
+        delete before->left;
+        before->left=nullptr;
+        delete before->right;
+        before->right=nullptr;
         delete before;
-        before = nullptr;
+        before=nullptr;
+        cout<<key<<" deleted\n";
         return;
     };
 
     while(searcher!=nullptr)
     {
+        if(searcher->number>key)
+        {
+            before=searcher;
+            searcher = searcher->left;
+           // left = searcher->left;
+            //right = searcher->right;
+        }
+        else if(searcher->number<key)
+        {
+            before = searcher;
+            searcher=searcher->right;
+            //left = searcher->left;
+           // right = searcher->right;
+        };
         if(searcher->number==key)
         {
             if(searcher->left==nullptr && searcher->right==nullptr)
             {
-                delete searcher;
+
+
                 searcher= nullptr;
+                delete searcher;
                 before->right = searcher;
                 cout<<key<<" deleted\n";
                 return;
             }
             else if(searcher->left == nullptr && searcher->right !=nullptr)
             {
+
                 before->right = searcher->right;
+                delete searcher->right;
+                searcher->right = nullptr;
+                 delete searcher->left;
+                searcher->left = nullptr;
                 delete searcher;
                 searcher = nullptr;
-                cout<<key<<" deleted\n";
+                cout<<key<<"deleted\n";
                 return;
             }
             else if(searcher->left!=nullptr && searcher->right==nullptr)
             {
                 before->left = searcher->left;
+                delete searcher->left;
+                searcher->left = nullptr;
+                delete searcher->right;
+                searcher->right = nullptr;
                 delete searcher;
                 searcher= nullptr;
-                cout<<key<<" deleted\n";
+                cout<<key<<"deleted\n";
                 return;
             }
             else if(searcher->left!=nullptr && searcher->right!=nullptr)
@@ -167,32 +203,20 @@ void BST::deleteNode(int key)
                 node* mainpos = searcher;
                 while(searcher!=nullptr)
                 {
-                    before = searcher;
+                    before=searcher;
                     searcher = searcher->right;
                 }
                 mainpos->number= before->number;
+
                 delete searcher;
                 searcher = nullptr;
                 delete before;
                 before = nullptr;
-                cout<<key<<" deleted\n";
+                cout<<mainpos->number<<" is new large\n";
                 return;
             }
         }
-        if(searcher->number>key)
-            {
-                before=searcher;
-                searcher = searcher->left;
-               // left = searcher->left;
-                //right = searcher->right;
-            }
-            else if(searcher->number<key)
-            {
-                before = searcher;
-                searcher=searcher->right;
-                //left = searcher->left;
-               // right = searcher->right;
-            };
+
     }
     if(searcher==nullptr)
         cout<<"Value not in tree\n";
@@ -237,4 +261,76 @@ void BST::sortedOrder()
         return;
     }
     cout<<"tree is empty\n";
+}
+
+double BST::adder(node * ROL)
+{
+    double  mainNumber = ROL->number;
+    double leftNumber=0;
+    double rightNumber = 0;
+    if(ROL->left==nullptr && ROL->right==nullptr)
+        return mainNumber;
+
+    if(ROL->right!=nullptr)
+    {
+        rightNumber= mainNumber+adder(ROL->right);
+    }
+    if(ROL->left!=nullptr)
+    {
+        leftNumber = mainNumber + adder(ROL->left);
+    }
+
+    return (rightNumber>=leftNumber ) ? rightNumber : leftNumber;
+};
+
+
+
+void BST::findCost()
+{
+    if(root==nullptr)
+    {
+        cout<<"no node\n";
+        return;
+    }
+
+    cout<<"The most expensive path is: "<<adder(root)<<endl;
+}
+
+
+int BST::longestnode(node *ROL)
+{
+    int leftNumber=0;
+    int rightNumber = 0;
+    if(ROL->left==nullptr && ROL->right==nullptr)
+        return 1;
+
+    if(ROL->right!=nullptr)
+    {
+        rightNumber= 1+longestnode(ROL->right);
+    }
+    if(ROL->left!=nullptr)
+    {
+        leftNumber = 1 + longestnode(ROL->left);
+    }
+
+    return (rightNumber>=leftNumber ) ? rightNumber : leftNumber;
+};
+
+void BST::printTreeFormat()
+{
+    int *numtree;
+    int leftside=0;
+    int rightside=0 ;
+    int arrsize ;
+    if(root!=nullptr)
+    {
+        rightside = longestnode(root->right);
+        leftside = longestnode(root->left);
+        arrsize = leftside>=rightside? leftside:rightside;
+    }
+    arrsize = pow(2.0,arrsize+1)-1;
+    numtree = new int[arrsize];
+
+
+
 }
