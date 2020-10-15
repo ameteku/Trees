@@ -42,6 +42,7 @@ using namespace std;
 int main()
 
 {
+    //variable declarations
     int lowestlevel;
     int number;
     BST theTree;
@@ -50,15 +51,18 @@ int main()
     bool endIt=false;
 
 
+
+    // reiterating options
     while(!endIt)
     {
+        //asking for user input
         choice = options();
         switch(choice)
         {
         case 1:
             cout<<"Enter number you are looking for"<<endl;
             cin>>number;
-            found= theTree.findNode(number);
+            found= theTree.findNode(number); // checking if value i sin tree
             if(found)
                 cout<<"found\n";
             else
@@ -67,22 +71,22 @@ int main()
         case 2:
             cout<<"Enter number you want to insert"<<endl;
             cin>>number;
-            theTree.insertNode(number);
+            theTree.insertNode(number); //adding number to tree
 
             break;
         case 3:
             cout<<"Enter number you want to delete"<<endl;
             cin>>number;
-            theTree.deleteNode(number);
+            theTree.deleteNode(number); //removing number from tree
             break;
         case 4:
-            theTree.sortedOrder();
+            theTree.sortedOrder(); // printing out tree from ascending to descending
             break;
         case 5:
-            theTree.printTreeFormat();
+            theTree.printTreeFormat(); // printing in the tree format
             break;
         case 6:
-            theTree.findCost();
+            theTree.findCost(); // find expensive path
             break;
         case 7:
             endIt = true;
